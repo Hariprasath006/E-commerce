@@ -14,8 +14,8 @@ const register = async () => {
 
 try{
 
-const res = await axios.post(
-"http://localhost:5000/api/users/register",
+await axios.post(
+"https://ecommerce-backend-is5o.onrender.com/api/users/register",
 {
 name,
 email,
