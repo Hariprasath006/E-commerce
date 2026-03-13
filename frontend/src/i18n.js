@@ -5,7 +5,7 @@ const resources = {
 
   en:{
     translation:{
-      logo:"Amazon Snacks",
+      logo:"FreshShop",
       categories:"Categories",
       language:"Language",
       help:"Help",

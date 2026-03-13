@@ -1,82 +1,46 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { categories as localCategories } from "../assets/assets";
 
-function Categories() {
+function Categories({ selectedCategory, setSelectedCategory }) {
+  const navigate = useNavigate();
 
-const navigate = useNavigate();
+  const allCategory = {
+    text: "All",
+    path: "All",
+    image: "https://cdn-icons-png.flaticon.com/512/3050/3050147.png"
+  };
 
-const categories = [
+  const categories = [allCategory, ...localCategories];
 
-{
-name:"Organic veggies",
-image:"https://cdn-icons-png.flaticon.com/512/766/766212.png"
-},
-
-{
-name:"Fresh Fruits",
-image:"https://cdn-icons-png.flaticon.com/512/415/415733.png"
-},
-
-{
-name:"Cold Drinks",
-image:"https://cdn-icons-png.flaticon.com/512/3050/3050151.png"
-},
-
-{
-name:"Instant Food",
-image:"https://cdn-icons-png.flaticon.com/512/1046/1046784.png"
-},
-
-{
-name:"Dairy Products",
-image:"https://cdn-icons-png.flaticon.com/512/3050/3050147.png"
-},
-
-{
-name:"Bakery & Breads",
-image:"https://cdn-icons-png.flaticon.com/512/1046/1046786.png"
-},
-
-{
-name:"Grains & Cereals",
-image:"https://cdn-icons-png.flaticon.com/512/766/766223.png"
-}
-
-];
-
-return(
-
-<div className="categories-section">
-
-<h2 className="category-title">
-Categories
-</h2>
-
-<div className="category-grid">
-
-{categories.map((cat,index)=> (
-
-<div
-className="category-card"
-key={index}
-onClick={()=>navigate(`/products?category=${cat.name}`)}
-style={{cursor:"pointer"}}
->
-
-<img src={cat.image} alt={cat.name} />
-
-<p>{cat.name}</p>
-
-</div>
-
-))}
-
-</div>
-
-</div>
-
-);
-
+  return (
+    <div className="categories-section">
+      <h2 className="category-title">Shop by Category</h2>
+      <div className="category-scroll-container">
+        {categories.map((cat, index) => (
+          <div
+            className={`category-item ${selectedCategory === cat.path ? 'active' : ''}`}
+            key={index}
+            onClick={() => {
+              if (setSelectedCategory) {
+                setSelectedCategory(cat.path);
+              } else {
+                navigate(`/products?category=${cat.path}`);
+              }
+              setTimeout(() => {
+                document.getElementById('products')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }, 100);
+            }}
+          >
+            <div className="category-img-wrapper">
+              <img src={cat.image} alt={cat.text} loading="lazy" />
+            </div>
+            <p className="category-name">{cat.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default Categories;

@@ -27,9 +27,24 @@ type:String,
 default:""
 },
 
-image:{
-type:String
-}
+  image:{
+    type: [String]
+  },
+
+  rating: {
+    type: Number,
+    default: 0
+  },
+
+  numReviews: {
+    type: Number,
+    default: 0
+  },
+
+  stock: {
+    type: Number,
+    default: 50
+  }
 
 },{
 timestamps:true
